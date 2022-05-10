@@ -1,7 +1,11 @@
 To use on Lisa:
+
 git clone https://github.com/ReneEmmaneel/MONet-pytorch.git
+
 cd MONET-pytorch
+
 sbatch install_environment.job
+
 sbatch train.job
 
 # MONet in PyTorch
