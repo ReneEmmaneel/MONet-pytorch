@@ -1,3 +1,9 @@
+To use on Lisa:
+git clone https://github.com/ReneEmmaneel/MONet-pytorch.git
+cd MONET-pytorch
+sbatch install_environment.job
+sbatch train.job
+
 # MONet in PyTorch
 
 We provide a PyTorch implementation of [MONet](https://arxiv.org/abs/1901.11390).

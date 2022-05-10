@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu_shared_course
+#SBATCH --gres=gpu:2
+#SBATCH --job-name=TrainMONet
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --time=8:00:00
+#SBATCH --mem=64000M
+#SBATCH --output=slurm_output/train_output_%A.out
+
+module purge
+module load 2021
+module load Anaconda3/2021.05
+
+cd $HOME/MONET-pytorch/
+
+source activate pytorch-CycleGAN-and-pix2pix
+
+srun -u python train.py --dataroot ./datasets/CLEVR_v1.0 --name clevr_monet --model monet
