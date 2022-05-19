@@ -41,7 +41,7 @@ class MONetModel(BaseModel):
         - define loss function, visualization images, model names, and optimizers
         """
         BaseModel.__init__(self, opt)  # call the initialization method of BaseModel
-        self.loss_names = ['E', 'D', 'mask']
+        self.loss_names = ['E', 'D', 'mask', 'MSE']
         self.visual_names = ['m{}'.format(i) for i in range(opt.num_slots)] + \
                             ['x{}'.format(i) for i in range(opt.num_slots)] + \
                             ['xm{}'.format(i) for i in range(opt.num_slots)] + \
@@ -114,6 +114,9 @@ class MONetModel(BaseModel):
         self.b = torch.cat(b, dim=1)
         self.m = torch.cat(m, dim=1)
         self.m_tilde_logits = torch.cat(m_tilde_logits, dim=1)
+
+        #calculate MSE
+        self.loss_MSE = torch.nn.functional.mse_loss(self.x, self.x_tilde)
 
     def backward(self):
         """Calculate losses, gradients, and update network weights; called in every training iteration"""
